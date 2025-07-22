@@ -6,12 +6,14 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 16:06:23 by hfuki             #+#    #+#             */
-/*   Updated: 2025/07/21 18:45:45 by marvin           ###   ########.fr       */
+/*   Updated: 2025/07/22 21:49:35 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sort.h"
 #include "operations.h"
+#include "utils.h"
+#include "printf/ft_printf.h"
 
 static int	partition_a_to_b(t_stack *a, t_stack *b, int size, int pivot)
 {
@@ -21,7 +23,7 @@ static int	partition_a_to_b(t_stack *a, t_stack *b, int size, int pivot)
 	c = 0;
 	while (size > 0)
 	{
-		if (a->top->next->value <= pivot)
+		if (a->top->next->value < pivot)
 			pb(a, b);
 		else
 		{
@@ -70,7 +72,7 @@ void	quick_sort_b(t_stack *a, t_stack *b, int size)
 	int	count_rb;
 
 	if (size <= 3)
-		return (sort_small_b(b, a));
+		return (sort_small_b(a, b, size));
 	count_rb = partition_b_to_a(a, b, size, get_pivot(b, size));
 	quick_sort_b(a, b, count_rb);
 	quick_sort_a(a, b, size - count_rb);
@@ -79,15 +81,20 @@ void	quick_sort_b(t_stack *a, t_stack *b, int size)
 void	quick_sort_a(t_stack *a, t_stack *b, int size)
 {
 	int	count_ra;
+	int	s_size;
 
 	if (size <= 3)
 	{
-		while (size > 0)
+		s_size = size;
+		if (!is_sorted_size(a, size))
 		{
-			pb(a, b);
-			size--;
+			while (size > 0)
+			{
+				pb(a, b);
+				size--;
+			}
 		}
-		return (sort_small_b(b, a));
+		return (sort_small_b(a, b, s_size));
 	}
 	count_ra = partition_a_to_b(a, b, size, get_pivot(a, size));
 	quick_sort_b(a, b, size - count_ra);

@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 #include "operations.h"
+#include "utils.h"
+#include "printf/ft_printf.h"
 
 static void	sort_three_b(t_stack *b)
 {
@@ -39,27 +41,33 @@ static void	sort_three_b(t_stack *b)
 		rrb(b);
 }
 
-static void	b_to_a_bottom(t_stack *a, t_stack *b)
+static void	b_to_a_bottom(t_stack *a, t_stack *b, int size)
 {
-	int	size;
-
-	size = b->size;
 	while (size > 0)
 	{
 		pa(a, b);
 		ra(a);
 		size--;
 	}
+	if (!b->size)
+	{
+		while (size > 0)
+		{
+			ra(a);
+			size--;
+		}
+	}
 	return ;
 }
 
-void	sort_small_b(t_stack *a, t_stack *b)
+void	sort_small_b(t_stack *a, t_stack *b, int size)
 {
-	if (!a || !b)
-		return ;
-	if (b->size == 2)
-		sb(b);
-	else if (b->size == 3)
-		sort_three_b(b);
-	b_to_a_bottom(a, b);
+	if (!is_sorted(b))
+	{
+		if (b->size == 2)
+			sb(b);
+		else if (b->size == 3)
+			sort_three_b(b);
+	}
+	b_to_a_bottom(a, b, size);
 }

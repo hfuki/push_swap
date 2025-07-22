@@ -21,11 +21,30 @@ int	is_sorted(t_stack *a)
 	if (a->size < 2)
 		return (1);
 	node = a->top->next;
-	while (node != a->top)
+	while (node != a->top && node->next != a->top)
 	{
 		if (node->value > node->next->value)
 			return (0);
 		node = node->next;
+	}
+	return (1);
+}
+
+int	is_sorted_size(t_stack *a, int size)
+{
+	t_node	*node;
+	int		i;
+
+	if (a->size < 2)
+		return (1);
+	node = a->top->next;
+	i = 0;
+	while (node != a->top && node->next != a->top && i < size - 1)
+	{
+		if (node->value > node->next->value)
+			return (0);
+		node = node->next;
+		i++;
 	}
 	return (1);
 }
