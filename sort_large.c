@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 16:06:23 by hfuki             #+#    #+#             */
-/*   Updated: 2025/07/22 21:49:35 by marvin           ###   ########.fr       */
+/*   Updated: 2025/07/22 22:26:21 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	partition_a_to_b(t_stack *a, t_stack *b, int size, int pivot)
 	c = 0;
 	while (size > 0)
 	{
-		if (a->top->next->value < pivot)
+		if (a->top->next->value <= pivot)
 			pb(a, b);
 		else
 		{
@@ -49,7 +49,7 @@ static int	partition_b_to_a(t_stack *a, t_stack *b, int size, int pivot)
 	c = 0;
 	while (size > 0)
 	{
-		if (b->top->next->value > pivot)
+		if (b->top->next->value >= pivot)
 			pa(a, b);
 		else
 		{
