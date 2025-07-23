@@ -13,10 +13,13 @@
 #ifndef UTILS_H
 # define UTILS_H
 
+# include "stack.h"
+
 int		is_sorted(t_stack *a);
 int		has_duplicates(t_stack *a);
 int		str_is_int(const char *s);
 void	free_all(t_stack *a, t_stack *b);
 int		is_sorted_size(t_stack *a, int size);
+void	error_fin(t_stack *a, t_stack *b);
 
 #endif

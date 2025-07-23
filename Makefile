@@ -1,7 +1,7 @@
 NAME = push_swap
 CC = cc
 SRCS = get_pivot.c ope_1.c ope_2.c ope_3.c ope_4.c push_swap.c \
-	sort_large.c sort_small_a.c sort_small_b.c stack.c utils.c
+	sort_large.c sort_small_a.c sort_small_b.c stack.c utils.c utils_e.c
 CFLAGS = -Wall -Werror -Wextra
 OBJS = $(SRCS:.c=.o)
 

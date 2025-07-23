@@ -3,17 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hfuki <hfuki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 21:50:22 by hfuki             #+#    #+#             */
-/*   Updated: 2025/05/02 16:57:06 by marvin           ###   ########.fr       */
+/*   Updated: 2025/05/12 18:51:53 by hfuki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-#include "libft.h"
-#include <stdlib.h>
+static void	free_split(char **res, size_t j)
+{
+	while (j > 0)
+		free(res[--j]);
+	free(res);
+}
 
 size_t	word_count(char const *s, char c)
 {
@@ -93,7 +97,10 @@ char	**ft_split(char const *s, char c)
 	while (j < words)
 	{
 		if (!add_word(&res[j++], s, &i, c))
+		{
+			free_split(res, j);
 			return (NULL);
+		}
 	}
 	res[j] = NULL;
 	return (res);
